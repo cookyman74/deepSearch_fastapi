@@ -11,7 +11,7 @@ class FeedbackRequest(BaseModel):
     max_feedbacks: int = Field(3, description="생성할 최대 후속 질문 개수 (기본값: 3)", ge=1, le=5)
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "query": "인공지능의 윤리적 영향에 대해 알고 싶습니다",
                 "max_feedbacks": 3

@@ -10,9 +10,9 @@ from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
 app = FastAPI(
-    title=os.getenv("PROJECT_NAME"),
-    description=os.getenv("PROJECT_DESCRIPTION"),
-    version=os.getenv("PROJECT_VERSION"),
+    title=os.getenv("PROJECT_NAME", "my app"),
+    description=os.getenv("PROJECT_DESCRIPTION", "my project"),
+    version=os.getenv("PROJECT_VERSION", "0.0.1"),
 )
 
 # 피드백 관련 엔드포인트를 /feedback 경로로 등록.
@@ -21,7 +21,7 @@ app.include_router(feedback_routes.router, prefix="/feedback", tags=["Feedback"]
 app.include_router(chat_routes.router, prefix="/chat", tags=["Chat"])
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware, # type: ignore
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
@@ -39,4 +39,4 @@ def read_root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=9000, reload=True)
+    uvicorn.run("app.main:app", host="0.0.0.0", port=9000, reload=True)

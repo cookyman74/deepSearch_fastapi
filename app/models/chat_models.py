@@ -31,7 +31,7 @@ class ChatRequest(BaseModel):
     )
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "query": "인공지능의 윤리적 영향",
                 "feedback_items": [
@@ -58,7 +58,7 @@ class ChatResponse(BaseModel):
     execution_stats: Dict[str, Any] = Field(..., description="실행 통계 (토큰 수, 실행 시간 등)")
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "final_report": "# 연구 보고서\n\n## 개요\n... (보고서 내용)",
                 "search_queries_used": ["인공지능 윤리적 영향 최근 연구", "AI 윤리 가이드라인"],

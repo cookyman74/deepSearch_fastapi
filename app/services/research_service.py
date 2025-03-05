@@ -26,9 +26,9 @@ class ResearchStats(BaseModel):
 
 
 class ResearchResults(BaseModel):
-    learnings: List[str] = Field([], description="수집된 모든 학습 내용")
-    visited_urls: List[str] = Field([], description="방문한 모든 URL")
-    search_queries_used: List[str] = Field([], description="사용된 모든 검색 쿼리")
+    learnings: List[str] = Field(default_factory=list, description="수집된 모든 학습 내용")
+    visited_urls: List[str] = Field(default_factory=list, description="방문한 모든 URL")
+    search_queries_used: List[str] = Field(default_factory=list, description="사용된 모든 검색 쿼리")
     execution_stats: ResearchStats = Field(default_factory=ResearchStats, description="실행 통계")
 
 
@@ -265,6 +265,7 @@ async def async_deep_research(
     # 초기화
     start_time = time.time()
 
+    logger.info("Starting deep search: %s", query)
     if unique_learnings is None:
         unique_learnings = set()
     if unique_urls is None:

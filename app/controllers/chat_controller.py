@@ -56,7 +56,7 @@ def handle_chat(request: ChatRequest) -> ChatResponse:
             depth=request.settings.depth,
             client=client,
             model=research_model,
-            max_total_queries=os.getenv("MAX_QUERIES", 20)
+            max_total_queries=int(os.getenv("MAX_QUERIES", 20))
         )
 
         logger.info(
